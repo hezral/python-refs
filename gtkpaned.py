@@ -14,13 +14,13 @@ class PyApp(Gtk.Window):
    def __init__(self):
       super(PyApp, self).__init__()
       self.set_title("HPaned widget Demo")
-      self.set_default_size(250, 200)
+      self.set_default_size(640, 480)
       vp = Gtk.HPaned()
       sw = Gtk.ScrolledWindow()
       sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
 
       listbox_2 = Gtk.ListBox()
-      items = 'This is a sorted ListBox Fail'.split()
+      items = 'This is a sorted ListBox that has very long sentences and lists that goes on and on and on and on'.split()
 
       for item in items:
          listbox_2.add(ClipboardRowData(item))
@@ -34,26 +34,22 @@ class PyApp(Gtk.Window):
       listbox_2.set_sort_func(sort_func, None, False)
       listbox_2.set_filter_func(filter_func, None, False)
 
-      def on_row_activated(listbox_widget, row):
-         print(row.data)
-
-      listbox_2.connect('row-activated', self.on_activated)
+      listbox_2.connect('row-activated', self.on_row_activated)
 
       listbox_2.show_all()
 
-      vp.add1(listbox_2)
+      sw.add_with_viewport(listbox_2)
+
+      vp.add1(sw)
       self.tv = Gtk.TextView()
       vp.add2(self.tv)
       vp.set_position(100)
-      self.add(vp)
-
-      #tree.connect("row-activated", self.on_activated)
+      
+      self.add(vp)      
       self.connect("destroy", Gtk.main_quit)
       self.show_all()
 
-   def on_activated(self, widget, row):
-      #model = widget.get_model()
-      #text = model[row][0]
+   def on_row_activated(self, widget, row):
       text = row.data
       print(text)
 
