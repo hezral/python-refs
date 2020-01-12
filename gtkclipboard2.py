@@ -19,16 +19,15 @@ print("Current clipboard offers formats: " + str(clipboard.wait_for_targets()[1]
 #print(Gdk.Atom.name(targets))
 
 #print(dir(clipboard))
-#html_target = Gdk.Atom.intern('text/html', False)
-#clipboard.wait_for_contents(html_target).get_data()
+html_target = Gdk.Atom.intern('text/html', False)
+clipboard.wait_for_contents(html_target).get_data()
 
 #def dump_clipboard_callback(clipboard, selection_data, data=None):
 #   print(selection_data.data)
 
 #clipboard.request_contents(html_target , dump_clipboard_callback)
 
-#print(clipboard.wait_for_contents(html_target).get_data())
+print(clipboard.wait_for_contents(html_target).get_data())
 
 #print(clipboard.wait_is_text_available())
 
-#clipboard.request_contents(target, dump_clipboard_callback)
