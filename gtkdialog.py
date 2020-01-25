@@ -12,9 +12,11 @@ class DialogExample(Gtk.Dialog):
         self.set_default_size(150, 100)
 
         label = Gtk.Label("This is a dialog to display additional information")
+        image = Gtk.Image.new_from_icon_name("process-stop", Gtk.IconSize.MENU)
 
         box = self.get_content_area()
         box.add(label)
+        box.add(image)
         self.show_all()
 
 class DialogWindow(Gtk.Window):
@@ -26,8 +28,10 @@ class DialogWindow(Gtk.Window):
 
         button = Gtk.Button("Open dialog")
         button.connect("clicked", self.on_button_clicked)
+        image = Gtk.Image.new_from_icon_name("process-stop", Gtk.IconSize.MENU)
 
         self.add(button)
+        self.add(image)
 
     def on_button_clicked(self, widget):
         dialog = DialogExample(self)
