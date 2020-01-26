@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#https://pygtk.daa.com.narkive.com/sXTRvKEL/files-to-clipboard
+#https://pyGtk.daa.com.narkive.com/sXTRvKEL/files-to-clipboard
 
-import pygtk
-pygtk.require('2.0')
-import gtk
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 import time, urllib, sys
 import os.path
 import shutil
@@ -25,7 +25,7 @@ def uris_to_paths(uris):
 def paths_to_uris(paths):
     return [ "file://"+urllib.quote(path) for path in paths ]
 
-clipboard=gtk.clipboard_get()
+clipboard=Gtk.clipboard_get()
 
 op = sys.argv[1]
 if op == "--copy" or op == "--cut":
@@ -43,7 +43,7 @@ if op == "--copy" or op == "--cut":
 
     # não é suficiente:
     #targets = []
-    #targets = gtk.target_list_add_uri_targets(targets, 0)
+    #targets = Gtk.target_list_add_uri_targets(targets, 0)
 
     targets = [('x-special/gnome-copied-files',0,0), ("text/uri-list",0,0)]
     ret = clipboard.set_with_data(targets, get_func, clear_func)
@@ -71,7 +71,8 @@ else:
 
 def callback_targets(clipboard, targets, data):
     print "targets", targets
-    #clipboard.request_targets(callback_targets)
-    clipboard.request_contents("x-special/gnome-copied-files", callback)
 
-gtk.main()
+#clipboard.request_targets(callback_targets)
+clipboard.request_contents("x-special/gnome-copied-files", callback)
+
+Gtk.main()
