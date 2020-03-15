@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #https://pyGtk.daa.com.narkive.com/sXTRvKEL/files-to-clipboard
@@ -39,7 +39,7 @@ if op == "--copy" or op == "--cut":
         selectiondata.set(selectiondata.get_target(), 8, txt)
 
     def clear_func(clipboard, data):
-        print "clear_func"
+        print("clear_func")
 
     # não é suficiente:
     #targets = []
@@ -48,7 +48,7 @@ if op == "--copy" or op == "--cut":
     targets = [('x-special/gnome-copied-files',0,0), ("text/uri-list",0,0)]
     ret = clipboard.set_with_data(targets, get_func, clear_func)
 
-    print "ret", ret
+    print("ret", ret)
 
 elif op == "--paste":
 
@@ -61,7 +61,7 @@ elif op == "--paste":
         uris = lines[1:]
         files = uris_to_paths(uris)
         for file in files:
-            print "file", file
+            print("file", file)
 
 if action == "copy":
     shutil.copy(file, destination)
@@ -70,7 +70,7 @@ else:
     sys.exit()
 
 def callback_targets(clipboard, targets, data):
-    print "targets", targets
+    print("targets", targets)
 
 #clipboard.request_targets(callback_targets)
 clipboard.request_contents("x-special/gnome-copied-files", callback)

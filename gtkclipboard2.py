@@ -12,22 +12,31 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
-print("Current clipboard offers formats: " + str(clipboard.wait_for_targets()[1]))
+
 
 #targets = Gdk.Atom.intern('TARGETS', False)
 
 #print(Gdk.Atom.name(targets))
 
 #print(dir(clipboard))
-html_target = Gdk.Atom.intern('text/html', False)
-clipboard.wait_for_contents(html_target).get_data()
+#html_target = Gdk.Atom.intern('text/html', False)
+#clipboard.wait_for_contents(html_target).get_data()
 
 #def dump_clipboard_callback(clipboard, selection_data, data=None):
 #   print(selection_data.data)
 
 #clipboard.request_contents(html_target , dump_clipboard_callback)
 
-print(clipboard.wait_for_contents(html_target).get_data())
+
 
 #print(clipboard.wait_is_text_available())
 
+def on(clipboard):
+    print("Current clipboard offers formats: " + str(clipboard.wait_for_targets()[1]))
+    #print(clipboard.wait_for_contents(html_target).get_data())
+
+#clipboard.connect('owner_change',on)
+
+#Gtk.main()
+
+print("Current clipboard offers formats: " + str(clipboard.wait_for_targets()[1]))
